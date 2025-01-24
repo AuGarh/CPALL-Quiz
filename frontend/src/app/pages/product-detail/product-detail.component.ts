@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../serives/product.service';
 
 @Component({
     selector: 'product-detail',
@@ -9,7 +12,8 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
         CommonModule,
         FormsModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        InputTextModule
     ],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.css'
@@ -20,26 +24,29 @@ export class ProductDetailComponent implements OnInit {
 
     productForm: FormGroup = new FormGroup({
         id: new FormControl(''),
-        title: new FormControl('', { nonNullable: true }),
+        name: new FormControl('', { nonNullable: true }),
         price: new FormControl('', { nonNullable: true }),
         stock: new FormControl('', { nonNullable: true })
     });
 
 
-    product: any = {
-        "id": 1,
-        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        "price": "",
-        "stock": ""
-    };
+    product: Product = {
+        id: null,
+        name: '',
+        price: null,
+        stock: null
+    }
 
     constructor(
         private route: ActivatedRoute,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private productService: ProductService
     ) { }
 
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
+        if (this.id)
+            this.getProductDetail(Number(this.id));
 
         this.buildForm();
     }
@@ -47,10 +54,18 @@ export class ProductDetailComponent implements OnInit {
     buildForm() {
         this.productForm = this.formBuilder.group({
             id: this.product['id'],
-            title: [this.product['title'], [Validators.required]],
+            name: [this.product['name'], [Validators.required]],
             price: [this.product['price'], [Validators.required]],
             stock: [this.product['stock'], [Validators.required]],
         });
+    }
+
+    getProductDetail(id: number) {
+        this.productService.getProductDetail(id).subscribe(
+            (res: Product) => {
+                this.product = res;
+            }
+        );
     }
 
     save() {

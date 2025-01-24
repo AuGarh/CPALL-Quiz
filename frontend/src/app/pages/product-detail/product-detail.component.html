@@ -9,9 +9,9 @@
                         <span class="text-danger">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" placeholder="ชื่อสินค้า" formControlName="title"
-                            [(ngModel)]="product.title">
-                        <div *ngIf="!productForm.controls['title']?.valid && productForm.controls['title']?.touched"
+                        <input pInputText class="form-control" type="text" placeholder="ชื่อสินค้า" formControlName="name"
+                            [(ngModel)]="product.name">
+                        <div *ngIf="!productForm.controls['name']?.valid && productForm.controls['name']?.touched"
                             class="text-danger">
                             * โปรดกรอกชื่อสินค้า
                         </div>
@@ -21,7 +21,7 @@
                         <span class="text-danger">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input class="form-control" type="number" placeholder="ราคาขาย" formControlName="price"
+                        <input pInputText class="form-control" type="number" placeholder="ราคาขาย" formControlName="price"
                             [(ngModel)]="product.price">
                         <div *ngIf="!productForm.controls['price']?.valid && productForm.controls['price']?.touched"
                             class="text-danger">
@@ -33,7 +33,7 @@
                         <span class="text-danger">*</span>
                     </label>
                     <div class="col-md-10">
-                        <input class="form-control" type="number" placeholder="จำนวนในสต็อก" formControlName="stock"
+                        <input pInputText class="form-control" type="number" placeholder="จำนวนในสต็อก" formControlName="stock"
                             [(ngModel)]="product.stock">
                         <div *ngIf="!productForm.controls['stock']?.valid && productForm.controls['stock']?.touched"
                             class="text-danger">
