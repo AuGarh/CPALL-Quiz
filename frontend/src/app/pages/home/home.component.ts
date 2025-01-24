@@ -40,9 +40,11 @@ export class HomeComponent implements OnInit {
     }
 
     getProducts(search?: string) {
+        this.sharedService.showLoading();
         this.productService.getProductList(search).subscribe(
             (res: Product[]) => {
                 this.products = res;
+                this.sharedService.hideLoading();
             }
         );
     }
@@ -53,6 +55,7 @@ export class HomeComponent implements OnInit {
 
     deleteProduct(id: number) {
         this.sharedService.showAlert('warning', 'Are you sure you want to delete this product?', () => {
+            this.sharedService.showLoading();
             this.productService.deleteProduct(id).subscribe(
                 () => {
                     this.getProducts();

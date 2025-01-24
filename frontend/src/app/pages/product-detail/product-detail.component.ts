@@ -65,17 +65,21 @@ export class ProductDetailComponent implements OnInit {
     }
 
     getProductDetail(id: number) {
+        this.sharedService.showLoading();
         this.productService.getProductDetail(id).subscribe(
             (res: Product) => {
                 this.product = res;
+                this.sharedService.hideLoading();
             }
         );
     }
 
     save() {
+        this.sharedService.showLoading();
         if (this.id) {
             this.productService.updateProduct(this.id, this.productForm.value).subscribe(
                 () => {
+                    this.sharedService.hideLoading();
                     this.sharedService.showAlert('success', 'Product updated successfully',
                         () => {
                             this.router.navigate(['/']);
@@ -85,6 +89,7 @@ export class ProductDetailComponent implements OnInit {
         } else {
             this.productService.createProduct(this.productForm.value).subscribe(
                 () => {
+                    this.sharedService.hideLoading();
                     this.sharedService.showAlert('success', 'Product created successfully',
                         () => {
                             this.router.navigate(['/']);
