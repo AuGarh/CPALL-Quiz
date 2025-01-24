@@ -23,7 +23,6 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th></th>
-                <th></th>
             </tr>
         </ng-template>
         <ng-template #body let-product>
@@ -31,12 +30,10 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.price | number:'1.2-2' }}</td>
                 <td>{{ product.stock }}</td>
-                <td>
-                    <button class="btn btn-success" [routerLink]="['/edit', product.id]">
+                <td class="text-center">
+                    <button class="btn btn-success me-3" [routerLink]="['/edit', product.id]">
                         <i class="pi pi-pen-to-square"></i>
                     </button>
-                </td>
-                <td>
                     <button class="btn btn-danger" (click)="deleteProduct(product.id)">
                         <i class="pi pi-trash"></i>
                     </button>
