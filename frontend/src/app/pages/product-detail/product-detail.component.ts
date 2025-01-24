@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../serives/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'product-detail',
@@ -40,7 +41,8 @@ export class ProductDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private productService: ProductService
+        private productService: ProductService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -73,13 +75,27 @@ export class ProductDetailComponent implements OnInit {
         if (this.id) {
             this.productService.updateProduct(this.id, this.productForm.value).subscribe(
                 () => {
-                    alert('Product updated successfully');
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Product updated successfully',
+                        icon: 'success',
+                    })
+                        .then(() => {
+                            this.router.navigate(['/']);
+                        });
                 }
             );
         } else {
             this.productService.createProduct(this.productForm.value).subscribe(
                 () => {
-                    alert('Product created successfully');
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Product created successfully',
+                        icon: 'success',
+                    })
+                        .then(() => {
+                            this.router.navigate(['/']);
+                        });
                 }
             );
         }
