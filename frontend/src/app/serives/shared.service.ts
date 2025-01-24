@@ -24,15 +24,21 @@ export class SharedService {
         this.loading.next(false);
     }
 
-    public showAlert(icon: 'success' | 'error' | 'warning' | 'info', message: string, callback?: () => void): void {
-        const title = icon.charAt(0).toUpperCase() + icon.slice(1) + '!';
-        Swal.fire({
+    public showAlert(type: 'success' | 'error' | 'warning' | 'info', message: string, callback?: () => void): void {
+        const title = type.charAt(0).toUpperCase() + type.slice(1) + '!';
+        const swalOptions: any = {
             title: title,
             text: message,
-            icon: icon,
-        }).then(() => {
-            if (callback)
-                callback();
+            icon: type,
+            confirmButtonColor: "#198754",
+        };
+
+        if (type === 'warning')
+            swalOptions.showCancelButton = true;
+
+        Swal.fire(swalOptions).then((res) => {
+            if (res.isConfirmed && callback)
+          callback();
         });
     }
 
