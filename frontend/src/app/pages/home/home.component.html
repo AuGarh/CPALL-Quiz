@@ -1,11 +1,21 @@
 <div class="container products-header">
-    <p class="m-0">Products {{products.data.length}}</p>
-    <hr />
+    <div class="col-6 text-start">
+        <h1>Products</h1>
+        <p>จำนวน {{products?.length || 0}} รายการ</p>
+    </div>
+    <div class="col-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="ค้นหาสินค้า" [(ngModel)]="searchTerm">
+            <button class="btn btn-primary" type="button" (click)="searchProduct()">
+                <i class="pi pi-search"></i>
+            </button>
+        </div>
+    </div>
 </div>
 
 <section class="container products-container mt-1">
 
-    <p-table [value]="products.data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+    <p-table [value]="products || []" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
         [rowsPerPageOptions]="[5, 10, 20]">
         <ng-template #header>
             <tr>
@@ -18,9 +28,9 @@
         </ng-template>
         <ng-template #body let-product>
             <tr>
-                <td>{{ product.title }}</td>
+                <td>{{ product.name }}</td>
                 <td>{{ product.price | number:'1.2-2' }}</td>
-                <td>{{ product.rating.count }}</td>
+                <td>{{ product.stock }}</td>
                 <td>
                     <button class="btn btn-success" [routerLink]="['/product-detail', product.id]">
                         <i class="pi pi-pen-to-square"></i>
