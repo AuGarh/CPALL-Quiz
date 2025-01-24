@@ -5,6 +5,7 @@ import { TableModule } from 'primeng/table';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../serives/product.service';
 import { FormsModule } from '@angular/forms';
+import { SharedService } from '../../serives/shared.service';
 
 @Component({
     selector: 'home',
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
     }
 
     constructor(
-        private productService: ProductService
+        private productService: ProductService,
+        private sharedService: SharedService
     ) { }
 
     ngOnInit() {
@@ -50,10 +52,12 @@ export class HomeComponent implements OnInit {
     }
 
     deleteProduct(id: number) {
-        this.productService.deleteProduct(id).subscribe(
-            () => {
-                this.getProducts();
-            }
-        );
+        this.sharedService.showAlert('warning', 'Are you sure you want to delete this product?', () => {
+            this.productService.deleteProduct(id).subscribe(
+                () => {
+                    this.getProducts();
+                }
+            );
+        });
     }
 }
