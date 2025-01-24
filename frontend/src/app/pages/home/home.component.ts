@@ -50,7 +50,10 @@ export class HomeComponent implements OnInit {
     }
 
     deleteProduct(id: number) {
-        console.log(id);
-
+        this.productService.deleteProduct(id).subscribe(
+            () => {
+                this.getProducts();
+            }
+        );
     }
 }
