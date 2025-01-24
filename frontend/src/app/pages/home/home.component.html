@@ -32,7 +32,7 @@
                 <td>{{ product.price | number:'1.2-2' }}</td>
                 <td>{{ product.stock }}</td>
                 <td>
-                    <button class="btn btn-success" [routerLink]="['/product-detail', product.id]">
+                    <button class="btn btn-success" [routerLink]="['/edit', product.id]">
                         <i class="pi pi-pen-to-square"></i>
                     </button>
                 </td>

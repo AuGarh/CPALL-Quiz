@@ -13,7 +13,11 @@ export const routes: Routes = [
                 component: HomeComponent
             },
             {
-                path: 'product-detail/:id',
+                path: 'create',
+                component: ProductDetailComponent
+            },
+            {
+                path: 'edit/:id',
                 component: ProductDetailComponent
             }
         ]
