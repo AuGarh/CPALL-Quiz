@@ -23,6 +23,15 @@ router.get('/api/v1/products/:id', (req, res) => {
     });
 });
 
+router.post('/api/v1/products', (req, res) => {
+    const { name, price, stock } = req.body;
+    const sql = "INSERT INTO product (`name`, `price`, `stock`) VALUES (?, ?, ?)";
+    db.query(sql, [name, price, stock], (err, result) => {
+        if (err) res.send(err);
+        return res.json(result);
+    });
+});
+
 router.put('/api/v1/products/:id', (req, res) => {
     const sql = "update product set `name` = ?, `price` = ?, `stock` = ? where `id` = ?";
     const id = Number(req.params.id);

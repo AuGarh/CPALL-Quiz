@@ -20,7 +20,7 @@ import { ProductService } from '../../serives/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-    id: string | null | undefined;
+    id: number | null = null;
 
     productForm: FormGroup = new FormGroup({
         id: new FormControl(''),
@@ -44,7 +44,8 @@ export class ProductDetailComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.id = this.route.snapshot.paramMap.get('id');
+        const idParam = this.route.snapshot.paramMap.get('id');
+        this.id = idParam !== null ? Number(idParam) : null;
         if (this.id)
             this.getProductDetail(Number(this.id));
 
@@ -69,8 +70,18 @@ export class ProductDetailComponent implements OnInit {
     }
 
     save() {
-        console.log(this.productForm);
-
-        console.log(this.productForm.value);
+        if (this.id) {
+            this.productService.updateProduct(this.id, this.productForm.value).subscribe(
+                () => {
+                    alert('Product updated successfully');
+                }
+            );
+        } else {
+            this.productService.createProduct(this.productForm.value).subscribe(
+                () => {
+                    alert('Product created successfully');
+                }
+            );
+        }
     }
 }
