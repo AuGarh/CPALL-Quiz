@@ -1,0 +1,38 @@
+<div class="container products-header">
+    <p class="m-0">Products {{products.data.length}}</p>
+    <hr />
+</div>
+
+<section class="container products-container mt-1">
+
+    <p-table [value]="products.data" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]">
+        <ng-template #header>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-product>
+            <tr>
+                <td>{{ product.title }}</td>
+                <td>{{ product.price | number:'1.2-2' }}</td>
+                <td>{{ product.rating.count }}</td>
+                <td>
+                    <button class="btn btn-success" [routerLink]="['/product-detail', product.id]">
+                        <i class="pi pi-pen-to-square"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteProduct(product.id)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</section>

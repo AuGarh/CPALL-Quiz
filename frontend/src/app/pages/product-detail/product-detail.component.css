@@ -1,0 +1,10 @@
+.product-detail-container {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 16px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 4rem;
+  min-height: max-content;
+}
+

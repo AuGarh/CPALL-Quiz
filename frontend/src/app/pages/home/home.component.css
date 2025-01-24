@@ -1,0 +1,14 @@
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+    text-align: center;
+}
+
+.products-header p {
+  font-size: 16px;
+  font-weight: 600;
+}
+

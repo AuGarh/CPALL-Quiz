@@ -1,0 +1,14 @@
+.navbar {
+  background-color: #1c4ca0 !important;
+  padding: 1rem !important;
+}
+
+.nav-link {
+  color: white !important;
+  font-weight: 500 !important;
+  margin-left: 3.5rem;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show{
+  color: rgb(129, 129, 129) !important;
+}

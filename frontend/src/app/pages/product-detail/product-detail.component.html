@@ -1,0 +1,61 @@
+<section class="product-detail-container container">
+    <div class="row">
+        <div class="col-12">
+            <form [formGroup]="productForm" role="form" (ngSubmit)="save()">
+
+                <div class="form-group row">
+                    <label class="col-md-2 col-form-label mb-3">
+                        ชื่อสินค้า
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" placeholder="ชื่อสินค้า" formControlName="title"
+                            [(ngModel)]="product.title">
+                        <div *ngIf="!productForm.controls['title']?.valid && productForm.controls['title']?.touched"
+                            class="text-danger">
+                            * โปรดกรอกชื่อสินค้า
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label mb-3">
+                        ราคาขาย
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" placeholder="ราคาขาย" formControlName="price"
+                            [(ngModel)]="product.price">
+                        <div *ngIf="!productForm.controls['price']?.valid && productForm.controls['price']?.touched"
+                            class="text-danger">
+                            * โปรดกรอกราคาขาย
+                        </div>
+                    </div>
+                    <label class="col-md-2 col-form-label mb-3">
+                        จำนวนในสต็อก
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" placeholder="จำนวนในสต็อก" formControlName="stock"
+                            [(ngModel)]="product.stock">
+                        <div *ngIf="!productForm.controls['stock']?.valid && productForm.controls['stock']?.touched"
+                            class="text-danger">
+                            * โปรดกรอกจำนวนในสต็อก
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div align=center class="form-group">
+                            <button class="btn btn-primary me-2" type="submit" [disabled]="!productForm.valid">
+                                <i class="pi pi-save"></i>
+                                บันทึก
+                            </button>
+                            <button type="button" class="btn btn-danger" [routerLink]="['/']">
+                                <i class="pi pi-arrow-circle-left"></i>
+                                ยกเลิก
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
