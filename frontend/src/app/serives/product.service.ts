@@ -22,6 +22,10 @@ export class ProductService {
         return this._httpClient.get<Product[]>(url);
     }
 
+    getProductDetail(id: number): Observable<Product> {
+      return this._httpClient.get<Product>(`${this.baseUrl}/${id}`);
+    }
+
     deleteProduct(id: number): Observable<void> {
         return this._httpClient.delete<void>(`${this.baseUrl}/${id}`);
     }

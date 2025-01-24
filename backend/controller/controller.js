@@ -14,6 +14,15 @@ router.get('/api/v1/products', (req, res) => {
     });
 });
 
+router.get('/api/v1/products/:id', (req, res) => {
+    let sql = "SELECT * FROM product WHERE id = ?";
+    const id = Number(req.params.id);
+    db.query(sql, [id], (err, result) => {
+        if (err) res.send(err);
+        res.send(result[0]);
+    });
+});
+
 router.put('/api/v1/products/:id', (req, res) => {
     const sql = "update product set `name` = ?, `price` = ?, `stock` = ? where `id` = ?";
     const id = Number(req.params.id);
